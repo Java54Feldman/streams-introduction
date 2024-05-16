@@ -3,6 +3,9 @@ package telran.streams.tests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+
+import telran.streams.MinMaxAvg;
+
 import static telran.streams.StreamIntroductionsMethods.*
 
 ;
@@ -43,5 +46,23 @@ import java.util.NoSuchElementException;class StreamsIntroductionTests {
 		assertEquals(1000, ar.length);
 		assertTrue(Arrays.stream(ar).allMatch(n -> n >= 10 && n < 12));
 		assertEquals(21, sumDistinct(ar));
+	}
+	@Test
+	void getMinMaxAvgTest() {
+		int[] ar = {1, 2, 3, 4, 5};
+		MinMaxAvg mma = getMinMaxAvg(ar);
+		assertEquals(1, mma.min());
+		assertEquals(5, mma.max());
+		assertEquals(3.0, mma.avg());
+		assertThrowsExactly(NoSuchElementException.class, () -> getMinMaxAvg(new int[0]));
+	}
+	@Test
+	void displayShuffleTest() {
+		int ar[] = {1, 2, 3, 4, 5, 6, 7};
+		for(int i = 0; i < 10; i++) {
+			System.out.println();
+			displayShuffle(ar);
+			
+		}
 	}
 }
