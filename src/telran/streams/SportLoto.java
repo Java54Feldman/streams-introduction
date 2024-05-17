@@ -7,7 +7,6 @@ record MinMaxAmount(int min, int max, int amount) {}
 public class SportLoto {
 
 	public static void main(String[] args) {
-		// TODO 
 		//printing out sportloto random numbers
 		//application with command line mandatory arguments
 		//first argument minimal inclusive value

@@ -34,7 +34,6 @@ public class StreamIntroductionsMethods {
 	}
 
 	static public void displayShuffle(int ar[]) {
-		// TODO
 		// каждый вызов метода печатает массив в разном порядке
 		// prints out a given array in shuffled order
 		// example, array: [10, 20, 30, 40],
