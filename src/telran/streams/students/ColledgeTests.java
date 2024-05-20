@@ -3,6 +3,7 @@ package telran.streams.students;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -49,8 +50,8 @@ class ColledgeTests {
 	}
 	private static IntSummaryStatistics getHoursStatistics(Colledge col) {
 		//returns IntSummaryStatistics of hours for all colledge's students
-		return StreamSupport.stream(col.spliterator(), false)
-				.collect(Collectors.summarizingInt(student -> student.hours()));
+		return StreamSupport.stream(col.spliterator(), false).
+				mapToInt(Student::hours).summaryStatistics();
 	}
 	private static IntSummaryStatistics getMarksStatistics(Colledge col) {
 		//returns summary statistics for marks of all colledge's students
@@ -65,12 +66,9 @@ class ColledgeTests {
 		//in the case average marks are equaled there will be compared hours
 		//one code line
 		return StreamSupport.stream(col.spliterator(), false)
-				.sorted((s1, s2) -> {
-							int res = Double.compare(Arrays.stream(s2.marks()).average().orElseThrow(), 
-													 Arrays.stream(s1.marks()).average().orElseThrow());
-							return res == 0 ? Integer.compare(s2.hours(), s1.hours()) : res;	
-						})
-				.toArray(Student[]::new);
+				.sorted(Comparator.comparingDouble((Student s) -> Arrays.stream(s.marks())
+						.average().orElseThrow()
+						).thenComparingInt(s -> s.hours()).reversed()).toArray(Student[]::new);
 }
 	
 	@Test

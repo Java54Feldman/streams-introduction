@@ -26,7 +26,7 @@ public class Colledge implements Iterable<Student> {
 
 		@Override
 		public Student next() {
-			while (!hasNext()) {
+			if (!hasNext()) {
 				throw new NoSuchElementException();
 			}
 			return students[index++];
