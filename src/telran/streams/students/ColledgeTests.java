@@ -66,9 +66,7 @@ class ColledgeTests {
 		//in the case average marks are equaled there will be compared hours
 		//one code line
 		return StreamSupport.stream(col.spliterator(), false)
-				.sorted(Comparator.comparingDouble((Student s) -> Arrays.stream(s.marks())
-						.average().orElseThrow()
-						).thenComparingInt(s -> s.hours()).reversed()).toArray(Student[]::new);
+				.sorted().toArray(Student[]::new);
 }
 	
 	@Test
